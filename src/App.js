@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Game } from './Game';
 import { store } from './store';
+import './App.css';
 
 const App = () => {
   const [state, setState] = useState(store.getState());
@@ -12,7 +13,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>Крестики-Нолики</h1>
+      <h1 className="App">Крестики-Нолики</h1>
       <Game state={state} />
     </div>
   );
