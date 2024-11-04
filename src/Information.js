@@ -1,16 +1,16 @@
 import React from 'react';
 import './Information.css';
 
-const Information = ({ currentPlayer, isGameEnded, isDraw }) => {
+const Information = ({ currentPlayer, isGameEnded, isDraw, winner }) => {
   return (
     <div className="information">
       {isDraw
         ? 'Ничья'
         : isGameEnded
-        ? `Победитель: ${currentPlayer}`
+        ? `Победитель: ${winner}` // Используем winner вместо currentPlayer
         : `Ходит: ${currentPlayer}`}
     </div>
   );
 };
 
-export default Information;
+export { Information };

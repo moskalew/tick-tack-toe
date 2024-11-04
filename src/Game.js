@@ -1,43 +1,33 @@
-import React, { useState } from 'react';
-import Field from './Field';
-import Information from './Information';
-import './Game.css'; // создаем отдельный модуль стилей
+import React from 'react';
+import { Field } from './Field';
+import { Information } from './Information';
+import './Game.css';
+import { resetGame } from './actions';
+import { store } from './store';
 
-const Game = () => {
-  const [currentPlayer, setCurrentPlayer] = useState('X');
-  const [isGameEnded, setIsGameEnded] = useState(false);
-  const [isDraw, setIsDraw] = useState(false);
-  const [field, setField] = useState(Array(9).fill(''));
-
-  const resetGame = () => {
-    setCurrentPlayer('X');
-    setIsGameEnded(false);
-    setIsDraw(false);
-    setField(Array(9).fill(''));
+const Game = ({ state }) => {
+  const handleResetGame = () => {
+    store.dispatch(resetGame());
   };
 
   return (
     <div className="game">
       <Information
-        currentPlayer={currentPlayer}
-        isGameEnded={isGameEnded}
-        isDraw={isDraw}
+        currentPlayer={state.currentPlayer}
+        isGameEnded={state.isGameEnded}
+        isDraw={state.isDraw}
+        winner={state.winner} // Передаем информацию о победителе
       />
       <Field
-        field={field}
-        currentPlayer={currentPlayer}
-        setCurrentPlayer={setCurrentPlayer}
-        isGameEnded={isGameEnded}
-        setIsGameEnded={setIsGameEnded}
-        setIsDraw={setIsDraw}
-        setField={setField}
+        field={state.field}
+        currentPlayer={state.currentPlayer}
+        isGameEnded={state.isGameEnded}
       />
-      {/* Отдельный контейнер для кнопки */}
       <div className="button-container">
-        <button onClick={resetGame}>Начать заново</button>
+        <button onClick={handleResetGame}>Начать заново</button>
       </div>
     </div>
   );
 };
 
-export default Game;
+export { Game };
