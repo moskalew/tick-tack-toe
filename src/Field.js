@@ -1,21 +1,22 @@
 import React from 'react';
 import './Field.css';
-import { store } from './store';
+import { useDispatch } from 'react-redux';
 import { setField, switchPlayer } from './actions';
 
 const Field = ({ field, currentPlayer, isGameEnded }) => {
+  const dispatch = useDispatch();
+
   const handleClick = (index) => {
     if (field[index] === '' && !isGameEnded) {
-      // Проверка, что игра не завершена
-      store.dispatch(setField(index, currentPlayer));
-      store.dispatch(switchPlayer());
+      dispatch(setField(index, currentPlayer));
+      dispatch(switchPlayer());
     }
   };
 
   return (
-    <div className="field">
+    <div className='field'>
       {field.map((cell, index) => (
-        <button key={index} className="cell" onClick={() => handleClick(index)}>
+        <button key={index} className='cell' onClick={() => handleClick(index)}>
           {cell}
         </button>
       ))}
