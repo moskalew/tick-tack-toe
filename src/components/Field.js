@@ -58,7 +58,7 @@ const Field = ({
   };
 
   return (
-    <div className='grid grid-cols-3 grid-rows-3 gap-2 w-72 h-72 mx-auto'>
+    <div className='grid grid-cols-3 grid-rows-3 gap-2 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-square mx-auto'>
       {field.map((cell, index) => (
         <Cell key={index} value={cell} onClick={() => handleClick(index)} />
       ))}
